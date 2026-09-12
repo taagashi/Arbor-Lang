@@ -42,8 +42,8 @@ class Binary_seach_tree:
             return
 
         print(node.value, end=' ')
-        self.__em_ordem(node.left)
-        self.__em_ordem(node.right)
+        self.__pre_ordem(node.left)
+        self.__pre_ordem(node.right)
 
     def __em_ordem(self, node:Node):
         if node is None:
@@ -57,17 +57,17 @@ class Binary_seach_tree:
         if node is None:
             return
 
-        self.__em_ordem(node.left)
-        self.__em_ordem(node.right)
+        self.__pos_ordem(node.left)
+        self.__pos_ordem(node.right)
         print(node.value, end=' ')
 
     def __inserir(self, new_value, node):
         if node is None:
             return Node(new_value)
 
-        if new_value > self.node.value:
+        if new_value > node.value:
             node.right = self.__inserir(new_value, node.right)
-        elif new_value < self.node.value:
+        elif new_value < node.value:
             node.left = self.__inserir(new_value, node.left)
 
         return node

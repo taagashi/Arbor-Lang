@@ -1,4 +1,4 @@
-from arvore.gramatica_arvore_binaria import Interpreter
+from gramatica_arvore_binaria import Interpreter
 
 class DSLBinaryTree:
     def __init__(self):
