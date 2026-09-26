@@ -78,12 +78,13 @@ class Binary_seach_tree:
 
         self.__menor(node.left)
 
-    def __deletar(self, target, node:Node):
+    def __deletar(self, target, node: Node):
         if node is None:
             return None
 
         if target > node.value:
             node.right = self.__deletar(target, node.right)
+
         elif target < node.value:
             node.left = self.__deletar(target, node.left)
 
@@ -91,15 +92,15 @@ class Binary_seach_tree:
             if node.left is None and node.right is None:
                 return None
 
-            if node.right is not None:
-                return node.right
-
-            if node.left is not None:
-                return node.left
-
             if node.left is not None and node.right is not None:
-                sucessor:Node = self.__menor(node.right)
+                sucessor: Node = self.__menor(node.right)
                 node.value = sucessor.value
                 node.right = self.__deletar(sucessor.value, node.right)
+
+            elif node.right is not None:
+                return node.right
+
+            elif node.left is not None:
+                return node.left
 
         return node
