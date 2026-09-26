@@ -4,5 +4,7 @@ dsl_arvore_binaria = DSLBinaryTree()
 
 
 print(dsl_arvore_binaria.insert_comands("""
-quero inserir 10, 20, 5 e 25 e buscar o numero 5 e buscar 20 
+quero inserir 10, 20 buscar o numero 
+5 e organizar a arvore em_ordem deletar 20 e 
+visualizar em pre_ordem 
 """))

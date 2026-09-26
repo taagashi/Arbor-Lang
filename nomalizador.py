@@ -16,6 +16,7 @@ class Normalizer:
 
         resultado = []
 
+        # inserir 10 20 5 25 bucar 5
         for token in tokens:
             if token in PALAVRAS_CHAVE or token.lstrip("-").isdigit():
                 resultado.append(token)

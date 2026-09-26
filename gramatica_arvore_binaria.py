@@ -41,7 +41,7 @@ class Interpreter(Transformer):
     def interpret(self, comands):
         self.parser = Lark(gramatica, start='inicio')
         tree = self.parser.parse(self.normalizer.normalize(comands))
-        # print(tree.pretty())
+        print(tree.pretty())
         return self.transform(tree)
 
     def inicio(self, itens):
@@ -72,7 +72,7 @@ class Interpreter(Transformer):
             return None
 
         elif operacao == 'buscar':
-            return self.binary_tree.buscar(itens[1])
+            return ('busca', self.binary_tree.buscar(itens[1]))
 
         elif operacao == 'deletar':
             self.binary_tree.deletar(itens[1])
