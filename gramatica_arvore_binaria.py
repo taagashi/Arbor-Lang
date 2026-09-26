@@ -1,5 +1,6 @@
 from lark import Lark, Transformer
 from arvore_binaria import Binary_seach_tree
+from nomalizador import Normalizer
 
 gramatica = """
     inicio: operacao+
@@ -31,6 +32,7 @@ class Interpreter(Transformer):
         super().__init__()
 
         self.binary_tree = Binary_seach_tree()
+        self.normalizer = Normalizer()
         self.parser = Lark(gramatica, start='inicio')
 
     def NUMERO(self, token):
@@ -38,11 +40,16 @@ class Interpreter(Transformer):
 
     def interpret(self, comands):
         self.parser = Lark(gramatica, start='inicio')
-        tree = self.parser.parse(comands)
+        tree = self.parser.parse(self.normalizer.normalize(comands))
+        # print(tree.pretty())
         return self.transform(tree)
 
     def inicio(self, itens):
-        return itens[0] if len(itens) == 1 else itens[1]
+        valores_buscados = []
+        for item in itens:
+            if item is not None:
+                valores_buscados.append(item)
+        return valores_buscados
 
     def operacao(self, itens):
         operacao = str(itens[0])
@@ -50,18 +57,23 @@ class Interpreter(Transformer):
         if operacao == 'inserir':
             for item in itens[1:]:
                 self.binary_tree.inserir(item)
+            return None
 
         elif operacao == 'pre_ordem':
             self.binary_tree.pre_ordem()
+            return None
 
         elif operacao == 'em_ordem':
             self.binary_tree.em_ordem()
+            return None
 
         elif operacao == 'pos_ordem':
             self.binary_tree.pos_ordem()
+            return None
 
         elif operacao == 'buscar':
             return self.binary_tree.buscar(itens[1])
 
         elif operacao == 'deletar':
             self.binary_tree.deletar(itens[1])
+            return None

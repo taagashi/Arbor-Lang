@@ -26,16 +26,16 @@ class Binary_seach_tree:
         self.node = self.__deletar(target, self.node)
 
     # RENATA, AQUI SAO OS METODOS RECURSIVOS
-    def __buscar(self, target, node):
-        if node.value == target:
-            return target
-        elif node is None:
+    def __buscar(self, target, node:Node):
+        if node is None:
             return None
+        elif node.value == target:
+            return target
 
         if target > node.value:
-            self.__buscar(target, node.right)
+            return self.__buscar(target, node.right)
         elif target < node.value:
-            self.__buscar(target, node.left)
+            return self.__buscar(target, node.left)
 
     def __pre_ordem(self, node:Node):
         if node is None:
@@ -61,7 +61,7 @@ class Binary_seach_tree:
         self.__pos_ordem(node.right)
         print(node.value, end=' ')
 
-    def __inserir(self, new_value, node):
+    def __inserir(self, new_value, node:Node):
         if node is None:
             return Node(new_value)
 
