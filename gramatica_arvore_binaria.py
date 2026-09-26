@@ -72,7 +72,7 @@ class Interpreter(Transformer):
             return None
 
         elif operacao == 'buscar':
-            return ('busca', self.binary_tree.buscar(itens[1]))
+            return (operacao, self.binary_tree.buscar(itens[1]))
 
         elif operacao == 'deletar':
             self.binary_tree.deletar(itens[1])
