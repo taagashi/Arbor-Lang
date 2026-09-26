@@ -10,6 +10,9 @@ gramatica = """
             | EM_ORDEM 
             | POS_ORDEM 
             | DELETAR NUMERO
+            | MAIOR
+            | MENOR
+            | ALTURA
     
     
     PRE_ORDEM: "pre_ordem"
@@ -19,6 +22,9 @@ gramatica = """
     INSERIR: "inserir"
     BUSCAR: "buscar"
     DELETAR: "deletar"
+    MAIOR: "maior"
+    MENOR: "menor"
+    ALTURA: "altura"
         
     NUMERO: /-?[0-9]+/
 
@@ -72,8 +78,17 @@ class Interpreter(Transformer):
             return None
 
         elif operacao == 'buscar':
-            return ('busca', self.binary_tree.buscar(itens[1]))
+            return (operacao, self.binary_tree.buscar(itens[1]))
 
         elif operacao == 'deletar':
             self.binary_tree.deletar(itens[1])
             return None
+
+        elif operacao == 'maior':
+            return (operacao, self.binary_tree.maior())
+
+        elif operacao == 'menor':
+            return (operacao, self.binary_tree.menor())
+
+        elif operacao == 'altura':
+            return (operacao, self.binary_tree.altura())

@@ -4,7 +4,10 @@ PALAVRAS_CHAVE = {
     "deletar",
     "pre_ordem",
     "em_ordem",
-    "pos_ordem"
+    "pos_ordem",
+    "maior",
+    "menor",
+    "altura"
 }
 
 class Normalizer:

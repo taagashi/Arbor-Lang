@@ -22,10 +22,18 @@ class Binary_seach_tree:
         self.__pos_ordem(self.node)
         print()
 
+    def maior(self):
+        return self.__maior(self.node).value
+
+    def menor(self):
+        return self.__menor(self.node).value
+
+    def altura(self):
+        return self.__altura(self.node)
+
     def deletar(self, target):
         self.node = self.__deletar(target, self.node)
 
-    # RENATA, AQUI SAO OS METODOS RECURSIVOS
     def __buscar(self, target, node:Node):
         if node is None:
             return None
@@ -72,11 +80,28 @@ class Binary_seach_tree:
 
         return node
 
+    def __maior(self, node:Node):
+        if node.right is None:
+            return node
+
+        return self.__maior(node.right)
+
     def __menor(self, node:Node):
         if node.left is None:
             return node
 
-        self.__menor(node.left)
+        return self.__menor(node.left)
+
+    def __altura(self, node:Node):
+        if node is None:
+            return -1
+        
+        hleft = self.__altura(node.left)  
+        hright = self.__altura(node.right)
+
+        if hright > hleft:
+            return hright + 1
+        return hleft + 1
 
     def __deletar(self, target, node: Node):
         if node is None:
