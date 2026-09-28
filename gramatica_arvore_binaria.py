@@ -41,7 +41,7 @@ class Interpreter(Transformer):
     def interpret(self, comands):
         self.parser = Lark(gramatica, start='inicio')
         tree = self.parser.parse(self.normalizer.normalize(comands))
-        print(tree.pretty())
+        # print(tree.pretty())
         return self.transform(tree)
 
     def inicio(self, itens):

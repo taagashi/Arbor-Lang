@@ -11,14 +11,17 @@ class Binary_seach_tree:
         return self.__buscar(target, self.node)
 
     def pre_ordem(self):
+        print('Pre ordem: ', end='')
         self.__pre_ordem(self.node)
         print()
 
     def em_ordem(self):
+        print('Em ordem: ', end='')
         self.__em_ordem(self.node)
         print()
 
     def pos_ordem(self):
+        print('Pos ordem: ', end='')
         self.__pos_ordem(self.node)
         print()
 
@@ -37,14 +40,6 @@ class Binary_seach_tree:
         elif target < node.value:
             return self.__buscar(target, node.left)
 
-    def __pre_ordem(self, node:Node):
-        if node is None:
-            return
-
-        print(node.value, end=' ')
-        self.__pre_ordem(node.left)
-        self.__pre_ordem(node.right)
-
     def __em_ordem(self, node:Node):
         if node is None:
             return
@@ -52,6 +47,14 @@ class Binary_seach_tree:
         self.__em_ordem(node.left)
         print(node.value, end=' ')
         self.__em_ordem(node.right)
+
+    def __pre_ordem(self, node:Node):
+        if node is None:
+            return
+
+        print(node.value, end=' ')
+        self.__pre_ordem(node.left)
+        self.__pre_ordem(node.right)
 
     def __pos_ordem(self, node:Node):
         if node is None:
