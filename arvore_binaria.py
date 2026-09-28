@@ -25,6 +25,60 @@ class Binary_seach_tree:
         self.__pos_ordem(self.node)
         print()
 
+    def mapa_arvore(self):
+        if self.node is None:
+            print('(árvore vazia)')
+            return
+
+        nos_por_nivel = []
+        posicoes = {}
+        self.__posicionar_nos(self.node, 0, nos_por_nivel, posicoes)
+        maior_largura = max(len(str(no.value)) for nos in nos_por_nivel for no in nos)
+        espacamento = maior_largura + 4
+        largura = max(1, (len(posicoes) - 1) * espacamento + maior_largura + 2)
+        posicoes = {no: rank * espacamento + maior_largura // 2 + 1 for no, rank in posicoes.items()}
+        linhas = [[' '] * largura for _ in range(len(nos_por_nivel) * 2 - 1)]
+
+        for nivel, nos in enumerate(nos_por_nivel):
+            y_no = nivel * 2
+            for no in nos:
+                x = posicoes[no]
+                texto = str(no.value)
+                inicio = x - len(texto) // 2
+                for deslocamento, caractere in enumerate(texto):
+                    linhas[y_no][inicio + deslocamento] = caractere
+
+                if no.left is not None:
+                    self.__desenhar_aresta(linhas[y_no + 1], x, posicoes[no.left], 'left')
+                if no.right is not None:
+                    self.__desenhar_aresta(linhas[y_no + 1], x, posicoes[no.right], 'right')
+
+        for linha in linhas:
+            print(''.join(linha).rstrip())
+
+    def __posicionar_nos(self, node: Node, nivel: int, nos_por_nivel, posicoes, indice=None):
+        if node is None:
+            return 0 if indice is None else indice
+
+        if len(nos_por_nivel) <= nivel:
+            nos_por_nivel.append([])
+
+        proximo_indice = self.__posicionar_nos(node.left, nivel + 1, nos_por_nivel, posicoes, indice)
+        posicoes[node] = proximo_indice
+        nos_por_nivel[nivel].append(node)
+        proximo_indice += 1
+        return self.__posicionar_nos(node.right, nivel + 1, nos_por_nivel, posicoes, proximo_indice)
+
+    def __desenhar_aresta(self, linha, inicio, fim, lado):
+        if inicio == fim:
+            return
+
+        direcao = 1 if fim > inicio else -1
+        for x in range(inicio, fim, direcao):
+            linha[x] = '─'
+
+        linha[fim] = '▶' if lado == 'right' else '◀'
+
     def maior(self):
         return self.__maior(self.node).value
 

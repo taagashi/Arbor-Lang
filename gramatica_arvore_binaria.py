@@ -9,6 +9,7 @@ gramatica = """
             | PRE_ORDEM 
             | EM_ORDEM 
             | POS_ORDEM 
+            | MAPA_ARVORE
             | DELETAR NUMERO
             | MAIOR
             | MENOR
@@ -18,6 +19,7 @@ gramatica = """
     PRE_ORDEM: "pre_ordem"
     EM_ORDEM: "em_ordem"
     POS_ORDEM: "pos_ordem"
+    MAPA_ARVORE: "mapa_arvore"
 
     INSERIR: "inserir"
     BUSCAR: "buscar"
@@ -75,6 +77,10 @@ class Interpreter(Transformer):
 
         elif operacao == 'pos_ordem':
             self.binary_tree.pos_ordem()
+            return None
+
+        elif operacao == 'mapa_arvore':
+            self.binary_tree.mapa_arvore()
             return None
 
         elif operacao == 'buscar':

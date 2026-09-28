@@ -5,6 +5,7 @@ PALAVRAS_CHAVE = {
     "pre_ordem",
     "em_ordem",
     "pos_ordem",
+    "mapa_arvore",
     "maior",
     "menor",
     "altura"
